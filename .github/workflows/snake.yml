@@ -9,39 +9,37 @@ jobs:
   generate-snake:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout with write permission
+      # 1️⃣ Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # important so push works
           fetch-depth: 0
 
-      # Step 2: Generate Snake animation
+      # 2️⃣ Generate snake animation
       - name: Generate Snake
         uses: Platane/snk@v3
         with:
           github_user_name: Minhen96
           outputs: dist/snake.svg
 
-      # Step 3: Commit & Push to output branch
-      - name: Push Snake
+      # 3️⃣ Commit & push using PAT
+      - name: Push Snake to output branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-      
-          # Create 'output' branch if it doesn't exist
+          # Configure git
+          git config --global user.name "Min Hen Snake Bot"
+          git config --global user.email "evanyap96@gmail.com"
+
+          # Create output branch if it doesn't exist
           git fetch origin output || git checkout -b output
-      
+
           # Checkout output branch
           git checkout output || git checkout -b output
-      
+
           # Add generated file
           git add dist/*
-      
+
           # Commit only if changes exist
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
-      
-          # Push using the fine-grained PAT
+
+          # Push using PAT
           git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
