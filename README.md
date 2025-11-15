@@ -16,5 +16,12 @@
 ## 📊 Most Used Languages
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Minhen96&layout=compact&theme=radical)
 
-## 📊 My Activity
-![Minhen96's Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=Minhen96&theme=tokyo-night)
+## 📈 GitHub Stats
+![MinHen's GitHub stats](https://github-readme-stats.vercel.app/api?username=Minhen96&show_icons=true&theme=radical)
+
+## 🔥 What I'm Working On
+- Working in Ant International
+- Developing AI chatbot features using NLP
+- Learning AI tech, following AI trends  
+- Improving DevOps skills (Docker, AWS, CI/CD)
+- Learning monitoring skills
