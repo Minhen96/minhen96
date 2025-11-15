@@ -14,12 +14,7 @@
 - **Other:** Git, Postman, Twilio, Ngrok
 
 ## 📊 Most Used Languages
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Minhen96&layout=compact&theme=radical)
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Minhen96&layout=donut&langs_count=10&theme=radical&count_private=true)
-[![wakatime](https://wakatime.com/badge/user/your-id-here.svg)](https://wakatime.com/@your-id-here)
-![Wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=your-wakatime-username&layout=compact&theme=radical)
-![CodeStats](https://codestats.net/api/users/your_username/languages.svg)
-
 
 ## 📈 GitHub Stats
 ![MinHen's GitHub stats](https://github-readme-stats.vercel.app/api?username=Minhen96&show_icons=true&theme=radical)
