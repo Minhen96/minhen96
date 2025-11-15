@@ -1,6 +1,5 @@
 name: Snake Animation
 
-# Run every 12 hours and on manual trigger
 on:
   schedule:
     - cron: "0 */12 * * *"
@@ -10,9 +9,12 @@ jobs:
   generate-snake:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repo
+      # Step 1: Checkout with write permissions
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true  # <-- important
+          fetch-depth: 0
 
       # Step 2: Generate the snake animation
       - name: Generate Snake
@@ -34,11 +36,13 @@ jobs:
           # Checkout output branch
           git checkout output || git checkout -b output
 
-          # Copy generated file
+          # Add generated file
           git add dist/*
 
           # Commit only if there are changes
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
 
-          # Push to output branch
+          # Push using GITHUB_TOKEN
           git push origin output --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
