@@ -25,21 +25,20 @@ jobs:
       # 3️⃣ Commit & push using PAT
       - name: Push Snake to output branch
         run: |
-          # Configure git
           git config --global user.name "Min Hen Snake Bot"
           git config --global user.email "evanyap96@gmail.com"
-
-          # Create output branch if it doesn't exist
-          git fetch origin output || git checkout -b output
-
-          # Checkout output branch
-          git checkout output || git checkout -b output
-
+      
+          # Make sure we're on the output branch
+          git checkout output
+      
           # Add generated file
           git add dist/*
-
-          # Commit only if changes exist
+      
+          # Commit if changes exist
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
-
-          # Push using PAT
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output --force
+      
+          # Override remote to use PAT
+          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git
+      
+          # Push
+          git push origin output --force
