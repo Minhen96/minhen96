@@ -26,7 +26,7 @@
 ![MinHen's GitHub stats](https://github-readme-stats.vercel.app/api?username=Minhen96&show_icons=true&theme=radical)
 
 ## 🧩 Contribution Snake
-![snake gif](https://github.com/Minhen96/Minhen96/blob/output/github-contribution-grid-snake.svg)
+![snake gif](https://github.com/Minhen96/Minhen96/blob/output/dist/snake.svg)
 
 ## 🔥 What I'm Working On
 - Working in Ant International
