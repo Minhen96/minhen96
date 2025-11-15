@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?size=24&color=00F7FF&center=true&vCenter=true&width=800&lines=Hi+I'm+Min+Hen;Software+Engineer+%7C+Mobile+%26+Backend;AI+%7C+Blockchain+%7C+Cloud;Always+Learning+New+Things" />
+  </a>
+</p>
+
 # Hi there 👋, I’m Min Hen
 
 ## 🚀 About Me
@@ -18,6 +24,9 @@
 
 ## 📈 GitHub Stats
 ![MinHen's GitHub stats](https://github-readme-stats.vercel.app/api?username=Minhen96&show_icons=true&theme=radical)
+
+## 🧩 Contribution Snake
+![snake gif](https://github.com/Minhen96/Minhen96/blob/output/github-contribution-grid-snake.svg)
 
 ## 🔥 What I'm Working On
 - Working in Ant International
