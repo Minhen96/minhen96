@@ -23,22 +23,24 @@ jobs:
           outputs: dist/snake.svg
 
       # 3️⃣ Commit & push using PAT
-      - name: Push Snake to output branch
+      - name: Push Snake with PAT
         run: |
+          cd $GITHUB_WORKSPACE
+      
+          # Configure git
           git config --global user.name "Min Hen Snake Bot"
           git config --global user.email "evanyap96@gmail.com"
       
-          # Checkout output branch
-          git checkout output
+          # Checkout output branch explicitly from remote
+          git fetch https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output
+          git checkout -B output FETCH_HEAD
       
-          # Add generated files
+          # Add the generated snake
           git add dist/*
       
           # Commit only if changes exist
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
       
-          # Override the remote to use PAT
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git
-      
-          # Push to output branch
-          git push origin output --force
+          # Push using PAT directly
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output --force
+
