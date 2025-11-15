@@ -28,17 +28,17 @@ jobs:
           git config --global user.name "Min Hen Snake Bot"
           git config --global user.email "evanyap96@gmail.com"
       
-          # Make sure we're on the output branch
+          # Checkout output branch
           git checkout output
       
-          # Add generated file
+          # Add generated files
           git add dist/*
       
-          # Commit if changes exist
+          # Commit only if changes exist
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
       
-          # Override remote to use PAT
+          # Override the remote to use PAT
           git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git
       
-          # Push
+          # Push to output branch
           git push origin output --force
