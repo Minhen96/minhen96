@@ -2,35 +2,34 @@ name: Snake Animation
 
 on:
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "0 */12 * * *" # every 12 hours
   workflow_dispatch:
 
 jobs:
   generate-snake:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout with write permissions
+      # Step 1: Checkout with write permission
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # <-- important
+          persist-credentials: true  # important so push works
           fetch-depth: 0
 
-      # Step 2: Generate the snake animation
+      # Step 2: Generate Snake animation
       - name: Generate Snake
         uses: Platane/snk@v3
         with:
           github_user_name: Minhen96
           outputs: dist/snake.svg
 
-      # Step 3: Push the generated snake to 'output' branch
-      - name: Push Snake Animation
+      # Step 3: Commit & Push to output branch
+      - name: Push Snake
         run: |
-          # Configure git
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Create 'output' branch if it doesn't exist
+          # Create branch if it doesn't exist
           git fetch origin output || git checkout -b output
 
           # Checkout output branch
@@ -39,10 +38,10 @@ jobs:
           # Add generated file
           git add dist/*
 
-          # Commit only if there are changes
+          # Commit only if changes exist
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
 
-          # Push using GITHUB_TOKEN
+          # Push using preconfigured token
           git push origin output --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
