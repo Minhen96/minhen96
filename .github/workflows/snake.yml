@@ -22,25 +22,26 @@ jobs:
           github_user_name: Minhen96
           outputs: dist/snake.svg
 
-      # 3️⃣ Commit & push using PAT
-      - name: Push Snake with PAT
+      # 3️⃣ Commit & push using PAT (outside Docker)
+      - name: Push Snake using PAT
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           cd $GITHUB_WORKSPACE
-      
+
           # Configure git
           git config --global user.name "Min Hen Snake Bot"
           git config --global user.email "evanyap96@gmail.com"
-      
-          # Checkout output branch explicitly from remote
-          git fetch https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output
-          git checkout -B output FETCH_HEAD
-      
-          # Add the generated snake
-          git add dist/*
-      
-          # Commit only if changes exist
-          git diff-index --quiet HEAD || git commit -m "Generate Snake"
-      
-          # Push using PAT directly
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Minhen96/Minhen96.git output --force
 
+          # Fetch and checkout output branch using PAT
+          git fetch https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git output
+          git checkout -B output FETCH_HEAD
+
+          # Add generated snake
+          git add dist/*
+
+          # Commit only if there are changes
+          git diff-index --quiet HEAD || git commit -m "Generate Snake"
+
+          # Push using PAT
+          git push https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git output --force
