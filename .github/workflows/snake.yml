@@ -1,29 +1,44 @@
-name: Generate Snake
+name: Snake Animation
 
+# Run every 12 hours and on manual trigger
 on:
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
-  build:
+  generate-snake:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout the repo
       - name: Checkout
         uses: actions/checkout@v3
-        
-      - name: Generate Snake Animation
+
+      # Step 2: Generate the snake animation
+      - name: Generate Snake
         uses: Platane/snk@v3
         with:
           github_user_name: Minhen96
-          outputs: dist/github-contribution-grid-snake.svg
+          outputs: dist/snake.svg
 
-      - name: Push to output branch
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: output
-          commit_message: "Generated Snake Animation"
-          file_pattern: "dist/*"
+      # Step 3: Push the generated snake to 'output' branch
+      - name: Push Snake Animation
+        run: |
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create 'output' branch if it doesn't exist
+          git fetch origin output || git checkout -b output
+
+          # Checkout output branch
+          git checkout output || git checkout -b output
+
+          # Copy generated file
+          git add dist/*
+
+          # Commit only if there are changes
+          git diff-index --quiet HEAD || git commit -m "Generate Snake"
+
+          # Push to output branch
+          git push origin output --force
