@@ -1,47 +1,37 @@
 name: Snake Animation
-
 on:
   schedule:
-    - cron: "0 */12 * * *" # every 12 hours
+    - cron: "0 */12 * * *"
   workflow_dispatch:
 
 jobs:
   generate-snake:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      # 2️⃣ Generate snake animation
       - name: Generate Snake
         uses: Platane/snk@v3
         with:
           github_user_name: Minhen96
           outputs: dist/snake.svg
 
-      # 3️⃣ Commit & push using PAT (outside Docker)
-      - name: Push Snake using PAT
+      - name: Push Snake using PAT (force PAT auth)
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          cd $GITHUB_WORKSPACE
-
-          # Configure git
+          cd "$GITHUB_WORKSPACE"
           git config --global user.name "Min Hen Snake Bot"
           git config --global user.email "evanyap96@gmail.com"
-
-          # Fetch and checkout output branch using PAT
-          git fetch https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git output
-          git checkout -B output FETCH_HEAD
-
-          # Add generated snake
+          # remove checkout-auth extraheader that forces actions token
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          # fetch and check out output branch using PAT
+          git fetch https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git output || true
+          git checkout -B output FETCH_HEAD || git checkout -b output
           git add dist/*
-
-          # Commit only if there are changes
           git diff-index --quiet HEAD || git commit -m "Generate Snake"
-
-          # Push using PAT
-          git push https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git output --force
+          git remote set-url origin https://x-access-token:$PAT_TOKEN@github.com/Minhen96/Minhen96.git
+          git push origin output --force
