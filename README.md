@@ -6,6 +6,7 @@
 
 ## 🚀 About Me
 22-year-old Malaysian software engineer, passionate about mobile and backend solutions, AI/ML systems, and learning blockchain-enabled apps. Graduated with a Bachelor's in Software Engineering and currently working on Ant International developer position.  
+- 🌐 Portfolio: [minhen.vercel.app/](https://minhen.vercel.app/) 
 - 💼 LinkedIn: [linkedin.com/in/yap-min-hen-366b3a218](https://www.linkedin.com/in/yap-min-hen-366b3a218)
 - 📫 Email: [evanyap96@gmail.com](mailto:evanyap96@gmail.com)
 
